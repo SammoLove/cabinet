@@ -1,0 +1,16 @@
+!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head lang="en">
+	<meta charset="UTF-8"/>
+	<title>HELLO</title>
+</head>
+<body>
+This is tl/main.html
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+<p>Click <a th:href="@{/logout}">logout</a> to logout.</p>
+
+</body>
+</html>

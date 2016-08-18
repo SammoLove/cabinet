@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head lang="en">
+	<meta charset="UTF-8"/>
+	<title>HELLO</title>
+</head>
+<body>
+This is tl/main.html
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+E: <p th:text="${error}">123</p>
+W: <p th:text="${warning}">123</p>
+S: <p th:text="${success}">123</p>
+
+<div th:if="${param.error}">
+	Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+	You have been logged out.
+</div>
+
+<form th:action="@{/login}" method="post">
+	<div><label> User Name : <input type="email" name="email"/></label></div>
+	<div><label> Password: <input type="password" name="password"/></label></div>
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+	<div><input type="submit" value="Sign In"/></div>
+</form>
+
+</body>
+</html>

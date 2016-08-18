@@ -1,0 +1,3 @@
+CREATE DATABASE cabinet
+WITH OWNER = admin
+ENCODING = 'UTF8';
