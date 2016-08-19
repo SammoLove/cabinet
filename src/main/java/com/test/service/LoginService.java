@@ -5,7 +5,7 @@ import com.test.entity.Customer;
 public interface LoginService {
 	Customer checkPassword(String email, String password);
 
-	String findLoggedInUsername();
+	String findLoggedinUser();
 
 	void autologin(String username, String password);
 }

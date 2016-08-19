@@ -28,16 +28,16 @@ public class CustomerValidator implements org.springframework.validation.Validat
 			errors.rejectValue("email", "Abnormal an email size!");
 		}
 		if (customerService.findByEmail(customer.getEmail()) != null) {
-			errors.rejectValue("email", "This email already registered!");
+			errors.rejectValue("email", "userForm.email.duplicate");
 		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password EmptyOrWhitespace!");
-		if (customer.getPassword().length() < 8 || customer.getPassword().length() > 32) {
-			errors.rejectValue("password", "Size.userForm.password");
+		if (customer.getPassword().length() < 6 || customer.getPassword().length() > 32) {
+			errors.rejectValue("password", "Password size <6 or >32!");
 		}
 
 		if (!customer.getPasswordConfirm().equals(customer.getPassword())) {
-			errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+			errors.rejectValue("passwordConfirm", "Passwords mismatch!");
 		}
 	}
 }

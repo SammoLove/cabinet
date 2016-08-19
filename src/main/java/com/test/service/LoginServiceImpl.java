@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//@Service
-@Service("loginService")
+@Service
+//@Service("loginService")
 public class LoginServiceImpl implements LoginService {
 	private final CustomerRepository customerRepository;
 	private final UserDetailsService userDetailsService;
@@ -31,6 +31,7 @@ public class LoginServiceImpl implements LoginService {
 	@Transactional
 	public Customer checkPassword(String email, String password) throws UsernameNotFoundException {
 		final Customer customer = customerRepository.findByEmail(email);
+
 		if (customer != null && customer.getPassword().equals(password)) {
 			return customer;
 		} else { //if user with such email was not found
@@ -39,12 +40,11 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String findLoggedInUsername() {
+	public String findLoggedinUser() {
 		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
 		if (userDetails instanceof UserDetails) {
 			return ((UserDetails) userDetails).getUsername();
 		}
-
 		return null;
 	}
 

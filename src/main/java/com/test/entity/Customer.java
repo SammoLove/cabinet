@@ -50,7 +50,7 @@ public class Customer implements TransferObject {
 	@PrimaryKeyJoinColumn
 	private Set<Picture> pictures;
 
-	protected Customer() {
+	public Customer() {
 	}
 
 	public Customer(String name, String surname, Date birth, int role, String email, String password, String salt, String data) {

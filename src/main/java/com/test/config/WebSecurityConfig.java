@@ -27,7 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.userDetailsService(userDetailsService); while password was uncripted
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
@@ -44,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 				.logout()
-				//.logoutUrl("/logout")
+				.logoutUrl("/?info=logout")
 				.permitAll();
 		http.csrf()
 				.csrfTokenRepository(csrfTokenRepository());
