@@ -5,17 +5,20 @@ import com.test.service.CustomerService;
 import com.test.service.LoginService;
 import com.test.validator.CustomerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -38,27 +41,15 @@ public class MainController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/")
-	public String index(@RequestParam(value = "error", required = false) String error,
-						@RequestParam(value = "warning", required = false) String warning,
-						@RequestParam(value = "success", required = false) String success,
-						Model model) {
-		if (error != null) {
-			if (error.equals("PWRequired")) {
-				//сделать обработку JS сразу на странице!
-				model.addAttribute("error", "PWRequired");
-			}
-		}
+	@RequestMapping({"", "/"})
+	public ModelAndView index(@RequestParam(value = "error", required = false) String error,
+							  @RequestParam(value = "warning", required = false) String warning,
+							  @RequestParam(value = "success", required = false) String success) {
+		// mayby try to push all messages in "msg" parameter
 
-
-		// mayby try to lay all messages in "msg" parameter
-
-		model.addAttribute("error", error);
-		model.addAttribute("warning", warning);
-		model.addAttribute("success", success);
-
-		model.addAttribute("userForm", new Customer());
-		return "tl/main";
+		Map<String, Object> model = new HashMap<>();
+		model.put("customer", new Customer());
+		return new ModelAndView("tl/main", model);
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -73,5 +64,11 @@ public class MainController {
 		loginService.autologin(registerForm.getEmail(), registerForm.getPasswordConfirm());
 
 		return "redirect:/cabinet";
+	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd.MM.yyyy"), true);
+		binder.registerCustomEditor(Date.class, editor);
 	}
 }

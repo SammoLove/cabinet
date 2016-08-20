@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,8 @@ public class CabinetController {
 	}*/
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showCabinet() {
+	public String showCabinet(Model model) {
+		model.addAttribute("now", LocalDateTime.now());
 		return "tl/cabinet";
 	}
 
