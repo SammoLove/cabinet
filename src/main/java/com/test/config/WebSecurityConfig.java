@@ -41,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//.anyRequest().authenticated() ?? maybe will be just second line
 				.and()
 				.formLogin()
-				.loginPage("/?error=PWRequired")
-				.loginProcessingUrl("/login")
+				.loginPage("/") //was ?error=PWRequired
+				.loginProcessingUrl("/login1") //todo return wo 1
 				.successForwardUrl("/cabinet?info=Welcome")
 				//.failureUrl("/?error=WrongPW")
 				//.failureForwardUrl("/?error=PWRequired") or such

@@ -3,6 +3,7 @@ package com.test.service;
 import com.test.entity.Customer;
 import com.test.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,12 @@ public class LoginServiceImpl implements LoginService {
 	public LoginServiceImpl(CustomerRepository customerRepository, UserDetailsService userDetailsService) {
 		this.customerRepository = customerRepository;
 		this.userDetailsService = userDetailsService;
+	}
+
+	@Override
+	@PreAuthorize("hasRole(@roles.CUSTOMER)")
+	public boolean ensureCustomer() {
+		return true;
 	}
 
 	@Deprecated

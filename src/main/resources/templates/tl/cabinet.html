@@ -18,6 +18,8 @@ The time is: <strong th:text="${#temporals.format(now, 'dd/MMM/yyyy HH:mm')}">31
 Logged in user: <span sec:authentication="name"></span> |
 Roles: <span sec:authentication="principal.authorities">
 
+	<h1 th:inline="text">[[${customer.name}]], You are allowed here.</h1>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">

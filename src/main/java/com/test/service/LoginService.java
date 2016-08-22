@@ -3,6 +3,8 @@ package com.test.service;
 import com.test.entity.Customer;
 
 public interface LoginService {
+	boolean ensureCustomer();
+
 	Customer checkPassword(String email, String password);
 
 	String findLoggedinUser();

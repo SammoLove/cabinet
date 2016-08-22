@@ -44,10 +44,10 @@ public class LoginController {
 
 		Customer customer = loginService.checkPassword(email, password);
 
-		session.getCookie();
-		session.isPersistent();
-		session.setTimeout(10_000);
-		response.addCookie(null);
+//		session.getCookie();
+//		session.isPersistent();
+//		session.setTimeout(10_000);
+//		response.addCookie(null);
 
 		if (customer != null && customer.getId() > 0) { //if use was found
 

@@ -1,8 +1,8 @@
 package com.test.controller;
 
 import com.test.entity.Picture;
-import com.test.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.test.service.LoginService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +17,11 @@ import java.util.List;
 @RequestMapping("/cabinet*")
 @PreAuthorize("hasRole('CUSTOMER')")
 public class CabinetController {
-	@Autowired
-	CustomerRepository customerRepository;
+	private final LoginService loginService;
+
+	public CabinetController(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
 	/*@RequestMapping(method = RequestMethod.GET)
 	public List<Customer> getUsers() {
@@ -28,14 +31,19 @@ public class CabinetController {
 	}*/
 
 	@RequestMapping(method = RequestMethod.GET)
+	@Secured("hasRole('')")
 	public String showCabinet(Model model) {
-		model.addAttribute("now", LocalDateTime.now());
-		return "tl/cabinet";
+		model.addAttribute("now", LocalDateTime.now()); //todo delete this line
+		if (loginService.ensureCustomer()) {
+			return "tl/cabinet";
+		} else {
+			return "redirect:tl/main?error=NotCustomer";
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String addPictures(@ModelAttribute("pictureList") List<Picture> pictures, Model model) {
-		//checking errors
+		//todo maybe need in checking errors here
 		model.addAttribute("info", "pictures uploaded");
 		return "tl/cabinet";
 	}
