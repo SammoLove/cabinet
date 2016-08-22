@@ -28,6 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Customer customer = customerRepository.findByEmail(email);
+		return getFromCustomer(customer);
+	}
+
+	public UserDetails getFromCustomer(Customer customer) {
 		return new User(customer.getEmail(),
 				customer.getPassword(),
 				getAuthorities(customer.getRole()));

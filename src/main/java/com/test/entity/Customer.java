@@ -30,6 +30,9 @@ public class Customer implements TransferObject {
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	private Date birth;
 
+	@Column
+	private String data;
+
 	@NotNull
 	private int role;
 
@@ -42,12 +45,6 @@ public class Customer implements TransferObject {
 	@Transient
 	private String passwordConfirm;
 
-	@Column(nullable = false, length = 12)
-	private String salt;
-
-	@Column
-	private String data;
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "userId", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -56,14 +53,13 @@ public class Customer implements TransferObject {
 	public Customer() {
 	}
 
-	public Customer(String name, String surname, Date birth, int role, String email, String password, String salt, String data) {
+	public Customer(String name, String surname, Date birth, int role, String email, String password, String data) {
 		this.name = name;
 		this.surname = surname;
 		this.birth = birth;
 		this.role = role;
 		this.email = email;
 		this.password = password;
-		this.salt = salt;
 		this.data = data;
 	}
 
@@ -121,14 +117,6 @@ public class Customer implements TransferObject {
 		this.password = password;
 	}
 
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
 	public String getData() {
 		return data;
 	}
@@ -170,7 +158,6 @@ public class Customer implements TransferObject {
 		sb.append(", birth=").append(birth);
 		sb.append(", email='").append(email).append('\'');
 		sb.append(", password='").append(password).append('\'');
-		sb.append(", salt='").append(salt).append('\'');
 		sb.append(", data='").append(data).append('\'');
 		sb.append('}');
 		return sb.toString();

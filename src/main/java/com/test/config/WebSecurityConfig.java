@@ -41,10 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//.anyRequest().authenticated() ?? maybe will be just second line
 				.and()
 				.formLogin()
-				.loginPage("/") //was ?error=PWRequired
-				.loginProcessingUrl("/login1") //todo return wo 1
+				.loginPage("/?error=PWRequired")
+				.loginProcessingUrl("/login")
 				.successForwardUrl("/cabinet?info=Welcome")
-				//.failureUrl("/?error=WrongPW")
+				.failureUrl("/?error=WrongPW")
 				//.failureForwardUrl("/?error=PWRequired") or such
 				.permitAll()
 				.and()
@@ -69,15 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
+		//посмотриклассы имплементирующие PasswordEncoder
 	}
-
-	/*@Bean
-	public SaltSource saltSource() {
-		return new SaltSource() {
-			@Override
-			public Object getSalt(UserDetails userDetails) {
-				return null;
-			}
-		}
-	}*/
 }

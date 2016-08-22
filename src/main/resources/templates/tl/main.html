@@ -31,7 +31,7 @@
 
 
 				<div th:unless="${account}"> <!--if not logged in-->
-					<form th:action="@{/login1}" method="post" class="navbar-form navbar-right">
+					<form th:action="@{/login}" method="post" class="navbar-form navbar-right">
 						<div class="form-group">
 							<input type="email" placeholder="Email" name="email" class="form-control "/>
 						</div>
@@ -39,7 +39,7 @@
 							<input type="password" placeholder="Password" name="password" class="form-control"/>
 						</div>
 						<label class="checkbox">
-							<input type="checkbox" name="shortSession"/> Short session
+							<input type="checkbox" name="shortSession" class="text-primary"/>15 min session
 						</label>
 						<button type="submit" class="btn btn-success">Sign in</button>
 					</form>
@@ -59,16 +59,35 @@
 <div class="container" style="margin-top: 60px" id="page"> <!--width: 900px-->
 
 	<!--experiments field start-->
+
+	<div th:if="${customer} != null">
+		<div th:switch="${customer.role}">
+			<p th:case="'CUSTOMER'">User is an customer</p>
+			<p th:case="#{roles.CUSTOMER}">User is a manager</p>
+			<p th:case="*">User is guest</p>
+		</div>
+	</div>
+
 	<!--error checking-->
+	<div th:if="${param.error} != null">
+		<div th:switch="${param.error}">
+			<p th:case="'PWRequired'">PWRequired1</p>
+			<p th:case="''">unknown reason</p>
+			<p th:case="*">***</p>
+		</div>
+	</div>
+
+	<div th:if="${param.error} == PWRequired">PWRequired2</div>
 
 	<!--experiments end-->
 
-	<div th:if="${param.error}" class="alert alert-info alert-dismissible">
+	<div th:if="${param.error}" class="alert alert-danger alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
 				aria-hidden="true">&times;</span></button>
 		<strong>Error!</strong> For some reason
 		<!--<li th:each="error : ${#param.error('*')}" th:text="${error}">1</li>-->
 	</div>
+
 	<div th:if="${param.logout}" class="alert alert-info alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
 				aria-hidden="true">&times;</span></button>
@@ -78,7 +97,9 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2" id="page-content">
 
-			<form class="form-horizontal" id="regform" th:action="${register}" th:object="${customer}" method="POST">
+			<!--th:action="${/register}"-->
+			<form class="form-horizontal" id="regform" th:action="@{/register}" action="register"
+			      th:object="${customer}" method="POST">
 				<fieldset>
 					<div class="form-group">
 						<label for="name" class="col-lg-3 col-md-4 col-sm-5 col-xs-3 control-label">Name*</label>
@@ -100,7 +121,7 @@
 						<label for="birth" class="col-lg-3 col-md-4 col-sm-5 col-xs-3 control-label"><strong>Birth date
 							(ff users: dd.mm.yyy)*</strong></label>
 						<div class="col-lg-4 col-sm-5 col-xs-4">
-							<input type="date" class="form-control" id="birth" name="birth" value=""/>
+							<input type="datetime" class="form-control" th:field="*{birth}" id="birth" name="birth"/>
 						</div>
 					</div>
 

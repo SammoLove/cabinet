@@ -6,8 +6,7 @@ CREATE TABLE customer (
 	data     VARCHAR,
 	role     INT,
 	email    VARCHAR(90) NOT NULL UNIQUE,
-	password VARCHAR(12) NOT NULL,
-	salt     VARCHAR(12) NOT NULL
+	password VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE picture (

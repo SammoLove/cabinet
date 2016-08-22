@@ -57,7 +57,8 @@ public class MainController {
 		customerValidator.validate(registerForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("error", "Some register error");
+			model.addAttribute("error", bindingResult.getAllErrors());
+			model.addAttribute("customer", registerForm);
 			return "tl/main";
 		}
 		customerService.encodePasswordsAndSave(registerForm);
