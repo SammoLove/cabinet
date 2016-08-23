@@ -22,7 +22,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//registry.addViewController("tl/main").setViewName("login"); //todo is it need?
 		//registry.addViewController("tl/cabinet").setViewName("cabinet");
-		//registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/login").setViewName("login");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 }

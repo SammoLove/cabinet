@@ -4,9 +4,16 @@
 <head lang="en">
 	<meta charset="UTF-8"/>
 	<title>Main: login and register</title>
-	<link rel="stylesheet" href="./css/bootstrap.min.css"/>
-	<script src="../js/jquery-3.1.0.slim.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/css/jquery-ui.min.css"/>
+	<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+	<!--<script src="/js/jquery-3.1.0.slim.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+	<script src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -49,7 +56,6 @@
 					<p>Hello, [[${customer.name}]]</p>
 					<a th:href="@{/logout}" class="btn btn-danger">Logout</a>
 				</div>
-				>
 
 			</div>
 		</div>
@@ -78,7 +84,6 @@
 	</div>
 
 	<div th:if="${param.error} == PWRequired">PWRequired2</div>
-
 	<!--experiments end-->
 
 	<div th:if="${param.error}" class="alert alert-danger alert-dismissible">
@@ -121,6 +126,14 @@
 						<label for="birth" class="col-lg-3 col-md-4 col-sm-5 col-xs-3 control-label"><strong>Birth date
 							(ff users: dd.mm.yyy)*</strong></label>
 						<div class="col-lg-4 col-sm-5 col-xs-4">
+							<script>
+								$(function (){
+									$("#birth").datepicker({
+										dateFormat: "dd.mm.yy",
+										changeYear: true
+									});
+								});
+							</script>
 							<input type="datetime" class="form-control" th:field="*{birth}" id="birth" name="birth"/>
 						</div>
 					</div>
@@ -136,7 +149,8 @@
 						<label for="email" class="col-lg-3 col-md-4 col-sm-5 col-xs-3 control-label">Email*</label>
 
 						<div class="col-lg-4 col-sm-5 col-xs-4">
-							<input class="form-control" type="email" id="email" name="email" value=""/>
+							<input class="form-control" type="email" th:field="*{email}" id="email" name="email"
+							       value=""/>
 						</div>
 					</div>
 
@@ -144,7 +158,8 @@
 						<label for="password" class="col-lg-3 col-sm-3 col-xs-3 control-label">Password*</label>
 
 						<div class="col-lg-2 col-sm-3 col-xs-3">
-							<input class="form-control" type="password" id="password" name="password"/>
+							<input class="form-control" type="password" th:field="*{password}" id="password"
+							       name="password"/>
 						</div>
 						<div class="col-lg-2 col-sm-3 col-xs-3">
 							<input class="form-control" type="password" id="password2" name="passwordConfirm"

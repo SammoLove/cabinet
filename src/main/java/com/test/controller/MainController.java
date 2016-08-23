@@ -61,10 +61,13 @@ public class MainController {
 			model.addAttribute("customer", registerForm);
 			return "tl/main";
 		}
-		customerService.encodePasswordsAndSave(registerForm);
-		loginService.autologin(registerForm.getEmail(), registerForm.getPasswordConfirm());
+		model.addAttribute("info", "logged in");
+		model.addAttribute("customer", registerForm);
 
-		return "redirect:/cabinet";
+		customerService.encodePasswordsAndSave(registerForm);
+		//loginService.autologin(registerForm.getEmail(), registerForm.getPasswordConfirm());
+
+		return "redirect:tl/cabinet";
 	}
 
 	@InitBinder
