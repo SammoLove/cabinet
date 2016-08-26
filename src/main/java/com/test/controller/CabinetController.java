@@ -1,6 +1,6 @@
 package com.test.controller;
 
-import com.test.entity.Picture;
+import com.test.model.Picture;
 import com.test.service.LoginService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;

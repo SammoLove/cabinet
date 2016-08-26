@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.test.model;
 
 
 import org.springframework.context.annotation.Scope;

@@ -1,6 +1,6 @@
 package com.test.repository;
 
-import com.test.entity.Customer;
+import com.test.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 
 //@Repository

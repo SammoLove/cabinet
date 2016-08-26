@@ -1,6 +1,6 @@
 package com.test.controller;
 
-import com.test.entity.Customer;
+import com.test.model.Customer;
 import com.test.service.CustomerService;
 import com.test.service.LoginService;
 import com.test.validator.CustomerValidator;

@@ -75,7 +75,7 @@ public class JpaConfig implements TransactionManagementConfigurer {
 		entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
 		entityManagerFactoryBean.setDataSource(configureDataSource());
-		entityManagerFactoryBean.setPackagesToScan("com.test.entity");
+		entityManagerFactoryBean.setPackagesToScan("com.test.model");
 		entityManagerFactoryBean.afterPropertiesSet();
 		entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
 		return entityManagerFactoryBean.getObject();

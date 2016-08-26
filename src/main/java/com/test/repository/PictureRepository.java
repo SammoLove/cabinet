@@ -1,6 +1,6 @@
 package com.test.repository;
 
-import com.test.entity.Picture;
+import com.test.model.Picture;
 import org.springframework.data.repository.CrudRepository;
 
 //@Repository

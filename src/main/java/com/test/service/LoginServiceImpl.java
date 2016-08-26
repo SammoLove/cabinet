@@ -1,9 +1,8 @@
 package com.test.service;
 
-import com.test.entity.Customer;
+import com.test.model.Customer;
 import com.test.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-//@Service("loginService")
 public class LoginServiceImpl implements LoginService {
 	private final CustomerRepository customerRepository;
 	private final UserDetailsService userDetailsService;
@@ -28,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole(@roles.CUSTOMER)")
+	//@PreAuthorize("hasRole(@roles.CUSTOMER)")
 	public boolean ensureCustomer() {
 		return true;
 	}

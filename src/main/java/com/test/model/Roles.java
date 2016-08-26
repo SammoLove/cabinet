@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.test.model;
 
 /*WTF? With this class Spring Boot cant's start with error:
 *java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods

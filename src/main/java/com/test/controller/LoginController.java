@@ -1,7 +1,7 @@
 package com.test.controller;
 
-import com.test.entity.Customer;
-import com.test.entity.CustomerSessionStorage;
+import com.test.model.Customer;
+import com.test.model.CustomerSessionStorage;
 import com.test.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;

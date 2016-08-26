@@ -1,6 +1,6 @@
 package com.test.validator;
 
-import com.test.entity.Customer;
+import com.test.model.Customer;
 import com.test.service.CustomerService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -27,7 +27,7 @@ public class CustomerValidator implements org.springframework.validation.Validat
 		if (customer.getEmail().length() < 5 || customer.getEmail().length() > 32) {
 			errors.rejectValue("email", "Abnormal an email size!");
 		}
-		if (customerService.findByEmail(customer.getEmail()) != null) {
+		if (customerService.loadUserByUsername(customer.getEmail()) != null) {
 			errors.rejectValue("email", "userForm.email.duplicate");
 		}
 

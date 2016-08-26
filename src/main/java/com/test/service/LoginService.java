@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.entity.Customer;
+import com.test.model.Customer;
 
 public interface LoginService {
 	boolean ensureCustomer();
